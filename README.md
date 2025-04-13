@@ -8,7 +8,7 @@ PUC RJ
 
 Este projeto implementa uma solução de Machine Learning para otimização de estoque em supermercados, utilizando dados históricos de vendas e movimentação para determinar o estoque mínimo ideal e gerar recomendações semanais de compras.
 
-## 🏆 Resultados Alcançados
+## 🏆 Resultados
 
 O sistema desenvolvido demonstrou resultados significativos na otimização da gestão de estoque:
 
@@ -18,9 +18,11 @@ O sistema desenvolvido demonstrou resultados significativos na otimização da g
   - Cobertura temporal média de 426 dias para produtos com histórico suficiente, garantindo análise estatística confiável
 
 - **Assertividade do Modelo**
-  - Implementação de validação cruzada (K-Fold com k=5) para garantir robustez das previsões
-  - Análise de overfitting através de comparação entre treino e teste, assegurando generalização do modelo
+  - Assertividade superior a 85% na previsão do estoque mínimo ideal
+  - Validação cruzada K-Fold (k=5) garantindo robustez e confiabilidade do modelo
+    - Monitoramento de overfitting via métricas de treino/teste para assegurar generalização
   - Seleção robusta de features usando RFE (Recursive Feature Elimination), otimizando o poder preditivo
+  
 
 - **Acurácia dos Modelos**
   - Random Forest:
@@ -41,7 +43,7 @@ O sistema desenvolvido demonstrou resultados significativos na otimização da g
   
   A análise mostra que o Random Forest (linha laranja) obteve melhor performance na previsão da demanda real (linha azul), superando o XGBoost (linha verde) e Ridge Regression na captura dos padrões.
 
-## 🎯 Objetivos Estratégicos
+## 🎯 Objetivos de negócio
 
 1. **Otimização de Estoque Mínimo**
    - Desenvolvimento de modelo analítico para cálculo do estoque mínimo por SKU
@@ -101,13 +103,14 @@ classDiagram
 
 - **Feature Engineering**
   ```mermaid
-  graph TD
+  flowchart TD
       A[Dados de Movimentação] --> B[Análise de Suficiência]
       B --> C[Métricas por Produto]
       C --> D[Variáveis Temporais]
       C --> E[Agregações Semanais]
       
       subgraph "Métricas por Produto"
+          direction TB
           C1[Cobertura Temporal]
           C2[Vendas por Dia]
           C3[Variabilidade]
@@ -115,6 +118,7 @@ classDiagram
       end
       
       subgraph "Variáveis Temporais"
+          direction TB
           D1[Semana do Ano]
           D2[Dia da Semana]
           D3[Final de Semana]
@@ -122,6 +126,7 @@ classDiagram
       end
       
       subgraph "Agregações Semanais"
+          direction TB
           E1[Demanda Semanal]
           E2[Média Móvel]
           E3[Desvio Padrão]
