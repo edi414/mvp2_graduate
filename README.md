@@ -103,59 +103,63 @@ classDiagram
 
 - **Feature Engineering**
   ```mermaid
-  flowchart TD
-      A[Dados de Movimentação] --> B[Análise de Suficiência]
-      B --> C[Métricas por Produto]
-      C --> D[Variáveis Temporais]
-      C --> E[Agregações Semanais]
-      
-      subgraph "Métricas por Produto"
-          direction TB
-          C1[Cobertura Temporal]
-          C2[Vendas por Dia]
-          C3[Variabilidade]
-          C4[Percentual Dias com Vendas]
-      end
-      
-      subgraph "Variáveis Temporais"
-          direction TB
-          D1[Semana do Ano]
-          D2[Dia da Semana]
-          D3[Final de Semana]
-          D4[Início/Fim de Mês]
-      end
-      
-      subgraph "Agregações Semanais"
-          direction TB
-          E1[Demanda Semanal]
-          E2[Média Móvel]
-          E3[Desvio Padrão]
-      end
+  graph LR
+    subgraph Análise de Suficiência
+        direction TB
+        CT[Cobertura Temporal]
+        VD[Vendas Diárias]
+        VB[Variabilidade]
+        DV[Dias com Vendas]
+        
+        CT & VD & VB & DV --> AS[Análise de Suficiência]
+        AS --> FH[Flag Histórico<br>Suficiente/Insuficiente]
+    end
+
+    subgraph Features Temporais
+        direction TB
+        SA[Semana/Ano]
+        DS[Dia/Semana]
+        FS[Fim de Semana]
+        IM[Início/Fim Mês]
+        
+        SA & DS & FS & IM --> FT[Features<br>Temporais]
+    end
+
+    subgraph Agregações
+        direction TB
+        DM[Demanda Semanal]
+        MM[Média Móvel]
+        DP[Desvio Padrão]
+    end
+
+    FH --> FT
+    FT --> DM & MM & DP
   ```
 
   O processo de Feature Engineering foi estruturado em três etapas principais:
 
   1. **Análise de Suficiência de Dados**
-     - Implementação da classe `DataModeling` para cálculo de métricas por produto
-     - Critérios de suficiência:
-       - Cobertura temporal mínima de 20 dias
-       - Frequência mínima de vendas diárias
-       - Variabilidade mínima nas vendas
-       - Percentual mínimo de dias com vendas (5%)
-     - Flag `pouco_historico` para identificar produtos com histórico insuficiente
+     - Implementação de critérios rigorosos para garantir confiabilidade:
+       - **Cobertura Temporal**: Mínimo de 20 dias entre primeira e última venda
+       - **Frequência de Vendas**: Média mínima de 1 venda por dia
+       - **Densidade de Vendas**: Mínimo de 5% dos dias com vendas
+       - **Variabilidade**: Análise conjunta com frequência para identificar padrões confiáveis
+     - Produtos que não atendem aos critérios são marcados com flag `pouco_historico`
+     - Apenas produtos com histórico suficiente seguem para modelagem
 
   2. **Variáveis Temporais**
-     - Transformação de datas em features temporais:
-       - Semana do ano e semana do mês
-       - Dia da semana (0-6)
-       - Indicador de final de semana
-       - Indicadores de início e fim de mês
-     - Objetivo: Capturar padrões sazonais e ciclos de venda
+     - Transformação de datas para capturar padrões sazonais:
+       - Semana do ano e do mês para sazonalidade
+       - Dia da semana (0-6) para padrões semanais
+       - Indicadores de fim de semana e início/fim de mês
+     - Objetivo: Identificar ciclos de venda
 
   3. **Agregações Semanais**
-     - Cálculo de demanda semanal por produto
-     - Agregação de vendas por semana
-     - Criação de visão semanal consolidada
+     - Consolidação dos dados para visão gerencial:
+       - Demanda semanal por produto
+       - Média móvel para tendências
+       - Desvio padrão para variabilidade
+     - Base para previsões e recomendações de compra
 
 ### 2. Modelagem
 - **Seleção de Features**
