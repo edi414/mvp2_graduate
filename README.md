@@ -1,4 +1,4 @@
-# Sistema de Otimização de Compras e Estoque
+# Sistema de otimização de compras e estoque
 
 MVP 02 - Machine Learning
 Edivaldo Bezerra Alves Júnior
@@ -38,7 +38,7 @@ O sistema desenvolvido demonstrou resultados significativos na otimização da g
     - RMSE: 12.09
     - R²: 0.78
 
-- **Visualização de Resultados**
+- **Resultados**
   ![Comparação de Previsões por Modelo](/images/resultado_demanda_prevista_modelos.png)
   
   A análise mostra que o Random Forest (linha laranja) obteve melhor performance na previsão da demanda real (linha azul), superando o XGBoost (linha verde) e Ridge Regression na captura dos padrões.
