@@ -1,4 +1,12 @@
-# Sistema de Recomendação de Estoque Mínimo para Supermercados
+# Sistema de Otimização de Compras e Estoque
+
+MVP 02 - Machine Learning
+Edivaldo Bezerra Alves Júnior
+PUC RJ
+
+## 📋 Visão Geral
+
+Este projeto implementa uma solução de Machine Learning para otimização de estoque em supermercados, utilizando dados históricos de vendas e movimentação para determinar o estoque mínimo ideal e gerar recomendações semanais de compras.
 
 ## 🏆 Resultados Alcançados
 
@@ -32,10 +40,6 @@ O sistema desenvolvido demonstrou resultados significativos na otimização da g
   ![Comparação de Previsões por Modelo](/images/resultado_demanda_prevista_modelos.png)
   
   A análise mostra que o Random Forest (linha laranja) obteve melhor performance na previsão da demanda real (linha azul), superando o XGBoost (linha verde) e Ridge Regression na captura dos padrões.
-
-## 📋 Visão Geral
-
-Este projeto implementa uma solução de Machine Learning para otimização de estoque em supermercados, utilizando dados históricos de vendas e movimentação para determinar o estoque mínimo ideal e gerar recomendações semanais de compras.
 
 ## 🎯 Objetivos Estratégicos
 
